@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team plan setup | ContractFocus</title>
+  <meta name="description" content="Set up a ContractFocus Team: one owner pays $99 a year, invites up to 5 teammates at no extra cost, shared contract history across the group.">
+  <meta name="theme-color" content="#0e7c66">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e7c66'/%3E%3Crect x='17' y='13' width='26' height='36' rx='2' fill='white'/%3E%3Crect x='13' y='28' width='34' height='8' rx='4' fill='%23ba7a1e' opacity='0.92'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg: #f5f7f6;
+      --surface: #ffffff;
+      --ink: #16211d;
+      --ink-soft: #55615c;
+      --line: #dfe4e2;
+      --brand: #0e7c66;
+      --brand-hover: #0a5c4c;
+      --brand-tint: rgba(14, 124, 102, 0.08);
+      --accent: #ba7a1e;
+      --warn: #92400e;
+      --warn-bg: #fef3c7;
+      --ok: #166534;
+      --ok-bg: #dcfce7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #eaf1ee;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--ink);
+    }
+    .brand-mark {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: var(--brand);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      left: 6.5px; top: 4.5px; width: 15px; height: 19px;
+      background: white;
+      border-radius: 1.5px;
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      left: 3.5px; top: 12px; width: 21px; height: 4.5px;
+      background: var(--accent);
+      border-radius: 3px;
+      opacity: 0.92;
+    }
+    .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--ink-soft); }
+    .nav-links a { color: var(--ink-soft); }
+
+    article {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 44px 48px;
+      margin: 40px auto;
+    }
+    article h1 {
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .lede {
+      color: var(--ink-soft);
+      font-size: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    article h2 {
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 40px 0 12px;
+    }
+    article h3 {
+      font-size: 17px;
+      margin: 26px 0 8px;
+    }
+    article p, article li {
+      color: var(--ink);
+      font-size: 15.5px;
+    }
+    article ul, article ol {
+      padding-left: 24px;
+    }
+    article li {
+      margin: 8px 0;
+    }
+    article strong { font-weight: 600; }
+
+    .pill-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 18px 0 8px;
+    }
+    .pill {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .pill .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .pill .val {
+      margin-top: 4px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 18px 0;
+      background: var(--bg);
+    }
+    .step-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .step p, .step li {
+      font-size: 15px;
+    }
+    .step p:last-child { margin-bottom: 0; }
+
+    .callout {
+      background: var(--brand-tint);
+      border-left: 3px solid var(--brand);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin: 18px 0;
+      font-size: 15px;
+    }
+    .callout.warn {
+      background: var(--warn-bg);
+      border-left-color: var(--warn);
+    }
+    .callout.ok {
+      background: var(--ok-bg);
+      border-left-color: var(--ok);
+    }
+
+    .toc {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 24px 0 32px;
+    }
+    .toc-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .toc li {
+      margin: 4px 0;
+      font-size: 14.5px;
+    }
+
+    .roles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 18px 0;
+    }
+    .role {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .role h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .role ul { margin: 8px 0 0; padding-left: 20px; }
+    .role li { font-size: 14.5px; margin: 4px 0; }
+
+    footer {
+      padding: 24px 0 56px;
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      text-align: center;
+    }
+    footer a { color: var(--ink-soft); }
+
+    @media (max-width: 600px) {
+      article { padding: 28px 22px; margin: 24px auto; border-radius: 0; border-left: 0; border-right: 0; }
+      .nav-links { display: none; }
+      .roles { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>ContractFocus</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/setup">Chrome AI setup</a>
+      <a href="/team">Team plan</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <article>
+    <h1>Set up your ContractFocus Team</h1>
+    <p class="lede">
+      The Team plan is for small legal, ops, real-estate, or procurement groups who want a shared library of decoded contracts. One person buys the seat, invites up to five teammates, and everyone sees the same scan history and clause flags. It's designed to be the cheapest way to get a whole group off pattern-matching-by-hand.
+    </p>
+
+    <div class="pill-row">
+      <div class="pill">
+        <div class="label">Price</div>
+        <div class="val">$99 per year</div>
+      </div>
+      <div class="pill">
+        <div class="label">Who pays</div>
+        <div class="val">One person (the owner)</div>
+      </div>
+      <div class="pill">
+        <div class="label">Included seats</div>
+        <div class="val">Owner + 5 teammates</div>
+      </div>
+      <div class="pill">
+        <div class="label">What's shared</div>
+        <div class="val">Summaries and clause flags</div>
+      </div>
+    </div>
+
+    <div class="toc" role="navigation" aria-labelledby="toc-label">
+      <div class="toc-label" id="toc-label">On this page</div>
+      <ol>
+        <li><a href="#model">How the owner-pays model works</a></li>
+        <li><a href="#owner">Owner: buy the plan and create a team</a></li>
+        <li><a href="#teammate">Teammate: join a team with an invite code</a></li>
+        <li><a href="#manage">Managing your team</a></li>
+        <li><a href="#sync">What syncs and what stays local</a></li>
+        <li><a href="#troubleshoot">Troubleshooting</a></li>
+      </ol>
+    </div>
+
+    <h2 id="model">How the owner-pays model works</h2>
+    <p>Most group SaaS charges per seat. ContractFocus Team charges once. The person who buys it becomes the <strong>owner</strong>, and they can invite up to five teammates to share a single contract library. Teammates don't pay anything. They download the extension for free, paste a six-character invite code into the Team tab, and they're in.</p>
+
+    <div class="roles">
+      <div class="role">
+        <h4>Owner</h4>
+        <ul>
+          <li>Pays $99 per year once</li>
+          <li>Creates the team and names it</li>
+          <li>Generates and rotates the invite code</li>
+          <li>Can remove teammates at any time</li>
+          <li>Receives version-change alerts for any team-tracked contract</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h4>Teammate</h4>
+        <ul>
+          <li>Free &mdash; the owner's seat covers them</li>
+          <li>Enters a 6-character invite code to join</li>
+          <li>Gets Team-level access to all clause packs while the team is active</li>
+          <li>Sees the full shared contract history</li>
+          <li>Can leave the team at any time from the Team tab</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Per-seat math.</strong> At the cap of 6 people (owner + 5 teammates), the Team plan works out to $16.50 per person per year. That's about one-third the price of Pro annual, and half of what per-seat team tools typically charge. The trade-off is a single billing contact instead of per-user subscriptions.
+    </div>
+
+    <h2 id="owner">Owner &middot; Buy the plan and create a team</h2>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">Install ContractFocus</div>
+      </div>
+      <p>Install the extension from the Chrome Web Store. You can skip this if you already have it installed. Pin the toolbar icon for easier access.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">Open the side panel and go to the Team tab</div>
+      </div>
+      <p>Click the ContractFocus icon in the Chrome toolbar. In the side panel, click the <strong>Team</strong> tab at the bottom. You'll see two options: <strong>Create a team</strong> and <strong>Join a team</strong>.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <div class="step-title">Click Create a team</div>
+      </div>
+      <p>ContractFocus will check whether you already have a Team subscription. If you don't, it redirects you to Stripe Checkout (via ExtensionPay) to complete the $99/year purchase. Use any card; Stripe handles it, we never see the details.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">4</div>
+        <div class="step-title">Name your team</div>
+      </div>
+      <p>After checkout, you're returned to the side panel. Enter a team name (something like "Acme Legal" or "Second Avenue Lease Review") and your display name as the owner. Click <strong>Create</strong>.</p>
+      <p>Behind the scenes, the extension creates a Firebase Anonymous Authentication identity for you and writes a team record to Firestore keyed by the team owner's auth ID.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">5</div>
+        <div class="step-title">Share the invite code</div>
+      </div>
+      <p>The Team tab will now show your 6-character invite code (for example, <code>K7P-8M2</code>). Send it to your teammates however you send secrets: Signal, 1Password shared vault, or a DM. The code is valid for 30 days and can be rotated at any time.</p>
+    </div>
+
+    <div class="callout ok">
+      <strong>That's it for the owner.</strong> Every contract you decode from now on is automatically added to the team-shared history (unless you mark an entry "private only" from the history view). New teammates will see the entries already in the library when they join.
+    </div>
+
+    <h2 id="teammate">Teammate &middot; Join a team with an invite code</h2>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">Install ContractFocus (free)</div>
+      </div>
+      <p>Install the extension from the Chrome Web Store. You do not need to purchase anything; your owner's seat covers you.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">Open the Team tab and click Join a team</div>
+      </div>
+      <p>Click the ContractFocus toolbar icon to open the side panel, then the <strong>Team</strong> tab, then <strong>Join a team</strong>.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <div class="step-title">Enter the invite code and your display name</div>
+      </div>
+      <p>Paste the 6-character code your owner shared (format: <code>AAA-BBB</code>). Enter the display name you want to appear next to your contract entries (for example, "Priya" or "Priya B."). Click <strong>Join team</strong>.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">4</div>
+        <div class="step-title">Wait for the library to sync</div>
+      </div>
+      <p>The side panel will show a progress message ("Syncing team library&hellip;") while Firestore pulls down the existing shared entries. Once it's done, you'll see the team name, owner, and every contract the team has decoded to date. All five clause packs and unlimited analyses are unlocked while your membership is active.</p>
+    </div>
+
+    <div class="callout">
+      <strong>You can stay in one team at a time.</strong> If you're already a member of a team and paste a new invite code, the Team tab will ask you to confirm leaving the current team before joining the new one.
+    </div>
+
+    <h2 id="manage">Managing your team</h2>
+
+    <h3>Seat usage</h3>
+    <p>The Team tab shows the current member list, their display names, and which entries each person contributed. The owner seat is always present; the other 5 slots fill as teammates join. Once all 5 are taken, the invite code stops working until a seat opens up.</p>
+
+    <h3>Rotating the invite code</h3>
+    <p>If a code leaks or a teammate leaves the company, click <strong>Rotate code</strong> in the owner view. A new code is generated immediately; the old one stops working on next use. Existing members are not affected &mdash; rotation only invalidates the code, not existing memberships.</p>
+
+    <h3>Removing a teammate</h3>
+    <p>From the owner view, click the "&hellip;" menu next to any member and choose <strong>Remove</strong>. Their Firebase membership record is deleted, their local side panel reverts to Free-tier defaults on next load, and their Team access ends. You can optionally also delete any contract entries they authored by ticking <strong>Also delete their entries</strong> before confirming.</p>
+
+    <h3>Leaving a team (teammate)</h3>
+    <p>In the Team tab, click <strong>Leave team</strong>. Your local Firebase identity is discarded, your membership record in Firestore is removed, and the shared entries disappear from your side panel. Anything you decoded while on the team stays in the team library unless the owner removes it.</p>
+
+    <h3>Owner changes</h3>
+    <p>There's no owner-transfer flow today. If the original owner is leaving, create a new team under a different account, copy over the entries you want to keep using the Export &rarr; Markdown action from the old team, and invite everyone to the new one. This is intentional: we'd rather keep the billing and Firebase identity tied to a single person than automate a swap that could lose data.</p>
+
+    <h3>Renewal and cancellation</h3>
+    <p>Team billing is annual through Stripe/ExtensionPay. You'll get a renewal email 30 days out. If you let it lapse, the grace period is 7 days; after that the team goes read-only for the owner and every teammate's side panel falls back to Free-tier. No data is deleted; renewing reactivates everything.</p>
+
+    <h2 id="sync">What syncs and what stays local</h2>
+    <p>Team sync is narrow by design. Here's exactly what leaves your device when you decode a contract while on the Team plan:</p>
+    <ul>
+      <li>The page URL and title</li>
+      <li>The detected document type (ToS, privacy policy, lease, NDA, etc.)</li>
+      <li>The plain-English bullet summary</li>
+      <li>The list of matched clause flags (name, severity, short explanation)</li>
+      <li>A timestamp, the word count, and your display name</li>
+    </ul>
+
+    <p>What <strong>never</strong> leaves your device:</p>
+    <ul>
+      <li>The raw contract text</li>
+      <li>The uploaded file bytes (PDF or plain-text uploads)</li>
+      <li>Anything outside the structured summary above</li>
+    </ul>
+
+    <p>Security rules in Firestore restrict reads and writes to members of your specific team. The owner can delete any record at any time. For the full disclosure, see <a href="/privacy#5-team-plan-sync-optional-paid-feature">Privacy Policy Section 5</a>.</p>
+
+    <h2 id="troubleshoot">Troubleshooting</h2>
+
+    <h3>Invite code says "invalid or expired"</h3>
+    <ul>
+      <li>Codes expire after 30 days. Ask the owner to rotate and resend.</li>
+      <li>The team may be full (6 total, owner included). Ask the owner to check the seat count.</li>
+      <li>Make sure you pasted the full code with the dash (format: <code>AAA-BBB</code>).</li>
+    </ul>
+
+    <h3>Teammates don't see new entries</h3>
+    <ul>
+      <li>Check the side panel status pill &mdash; it should read "Team synced" in green. If it says "Offline", the extension couldn't reach Firestore; check the teammate's network and any corporate VPN.</li>
+      <li>In rare cases, Firestore push updates can lag. Closing and reopening the side panel forces a refresh.</li>
+      <li>Confirm the contributor didn't mark the entry "private only" from the history view.</li>
+    </ul>
+
+    <h3>Billing renewed but panel still says "Team inactive"</h3>
+    <p>ExtensionPay caches subscription status for up to 30 minutes. Click <strong>Refresh subscription</strong> in the owner view, or restart Chrome. If it still shows inactive, email <a href="mailto:dev@loopheadlabs.com">dev@loopheadlabs.com</a> with your ExtensionPay email address.</p>
+
+    <h3>Can we use this for more than 6 people?</h3>
+    <p>Not today. The Team plan tops out at one owner plus five teammates. If you need more seats, reply to the renewal email or contact <a href="mailto:dev@loopheadlabs.com">dev@loopheadlabs.com</a> and we'll work something out. We'd rather size the right plan for a 10-person group than shoehorn it into a cap that wasn't built for it.</p>
+  </article>
+</div>
+
+<footer>
+  &copy; 2026 Loophead Labs LLC &nbsp;&middot;&nbsp; <a href="/">contractfocus.app</a>
+</footer>
+
+</body>
+</html>

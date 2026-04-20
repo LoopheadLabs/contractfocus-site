@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chrome AI setup for ContractFocus | Prompt API &amp; Summarizer</title>
+  <meta name="description" content="Step-by-step guide to enabling Chrome's built-in AI (Prompt API, Summarizer API, and Gemini Nano) so ContractFocus can run on-device document classification and plain-English summaries.">
+  <meta name="theme-color" content="#0e7c66">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e7c66'/%3E%3Crect x='17' y='13' width='26' height='36' rx='2' fill='white'/%3E%3Crect x='13' y='28' width='34' height='8' rx='4' fill='%23ba7a1e' opacity='0.92'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg: #f5f7f6;
+      --surface: #ffffff;
+      --ink: #16211d;
+      --ink-soft: #55615c;
+      --line: #dfe4e2;
+      --brand: #0e7c66;
+      --brand-hover: #0a5c4c;
+      --brand-tint: rgba(14, 124, 102, 0.08);
+      --accent: #ba7a1e;
+      --warn: #92400e;
+      --warn-bg: #fef3c7;
+      --ok: #166534;
+      --ok-bg: #dcfce7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #eaf1ee;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    pre {
+      background: #0f1e1a;
+      color: #e5e7eb;
+      padding: 16px 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 16px 0;
+    }
+
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--ink);
+    }
+    .brand-mark {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: var(--brand);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      left: 6.5px; top: 4.5px; width: 15px; height: 19px;
+      background: white;
+      border-radius: 1.5px;
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      left: 3.5px; top: 12px; width: 21px; height: 4.5px;
+      background: var(--accent);
+      border-radius: 3px;
+      opacity: 0.92;
+    }
+    .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--ink-soft); }
+    .nav-links a { color: var(--ink-soft); }
+
+    article {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 44px 48px;
+      margin: 40px auto;
+    }
+    article h1 {
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .lede {
+      color: var(--ink-soft);
+      font-size: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    article h2 {
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 40px 0 12px;
+    }
+    article h3 {
+      font-size: 17px;
+      margin: 26px 0 8px;
+    }
+    article p, article li {
+      color: var(--ink);
+      font-size: 15.5px;
+    }
+    article ul, article ol {
+      padding-left: 24px;
+    }
+    article li {
+      margin: 8px 0;
+    }
+    article strong { font-weight: 600; }
+
+    .req {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 10px 0 8px;
+    }
+    .req-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .req-card .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .req-card .val {
+      margin-top: 4px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 18px 0;
+      background: var(--bg);
+    }
+    .step-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .step p, .step li {
+      font-size: 15px;
+    }
+    .step p:last-child { margin-bottom: 0; }
+
+    .callout {
+      background: var(--brand-tint);
+      border-left: 3px solid var(--brand);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin: 18px 0;
+      font-size: 15px;
+    }
+    .callout.warn {
+      background: var(--warn-bg);
+      border-left-color: var(--warn);
+    }
+    .callout.ok {
+      background: var(--ok-bg);
+      border-left-color: var(--ok);
+    }
+
+    .toc {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 24px 0 32px;
+    }
+    .toc-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .toc ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .toc li {
+      margin: 4px 0;
+      font-size: 14.5px;
+    }
+
+    footer {
+      padding: 24px 0 56px;
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      text-align: center;
+    }
+    footer a { color: var(--ink-soft); }
+
+    @media (max-width: 600px) {
+      article { padding: 28px 22px; margin: 24px auto; border-radius: 0; border-left: 0; border-right: 0; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>ContractFocus</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/setup">Chrome AI setup</a>
+      <a href="/team">Team plan</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <article>
+    <h1>Turn on Chrome's built-in AI for ContractFocus</h1>
+    <p class="lede">
+      ContractFocus uses Chrome's built-in Gemini Nano model, entirely on your device, to classify legal documents and produce plain-English summaries. If Chrome's Prompt API and Summarizer API are available on your machine, ContractFocus will light up those features automatically. If they aren't, the extension still runs: the deterministic clause pattern matcher surfaces every red flag regardless. This guide walks you through the one-time AI setup.
+    </p>
+
+    <div class="toc" role="navigation" aria-labelledby="toc-label">
+      <div class="toc-label" id="toc-label">On this page</div>
+      <ol>
+        <li><a href="#requirements">System requirements</a></li>
+        <li><a href="#enable">Enable the Prompt and Summarizer flags</a></li>
+        <li><a href="#download">Download the Gemini Nano model</a></li>
+        <li><a href="#verify">Verify the setup works</a></li>
+        <li><a href="#troubleshoot">Troubleshooting</a></li>
+        <li><a href="#privacy">What stays on your device</a></li>
+      </ol>
+    </div>
+
+    <h2 id="requirements">System requirements</h2>
+    <p>Chrome's built-in AI runtime has hardware and OS constraints. Before you start, confirm your machine meets them. These minimums are set by Google for the Prompt API on device.</p>
+
+    <div class="req">
+      <div class="req-card">
+        <div class="label">Chrome</div>
+        <div class="val">Version 138 or later</div>
+      </div>
+      <div class="req-card">
+        <div class="label">OS</div>
+        <div class="val">Windows 10/11, macOS 13+, Linux</div>
+      </div>
+      <div class="req-card">
+        <div class="label">Storage</div>
+        <div class="val">~22 GB free for the model</div>
+      </div>
+      <div class="req-card">
+        <div class="label">GPU / VRAM</div>
+        <div class="val">4 GB VRAM or Apple Silicon</div>
+      </div>
+      <div class="req-card">
+        <div class="label">RAM</div>
+        <div class="val">8 GB minimum, 16 GB recommended</div>
+      </div>
+      <div class="req-card">
+        <div class="label">Network</div>
+        <div class="val">Unmetered connection for initial download</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>ChromeOS, Android, and iOS are not supported yet.</strong> If you're on one of those, ContractFocus still runs the pattern-based clause matcher and generates a templated summary from the detected flags, so you still get red-flag detection even without on-device AI.
+    </div>
+
+    <p>Not sure what version of Chrome you have? Open <code>chrome://version</code> in a new tab. The number after "Google Chrome" on the first line should be 138 or higher.</p>
+
+    <h2 id="enable">Step 1 &middot; Enable the Prompt and Summarizer flags</h2>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">Open Chrome flags</div>
+      </div>
+      <p>Copy each URL and paste it into the Chrome address bar (flag URLs can't be clicked as links for security reasons):</p>
+      <pre>chrome://flags/#prompt-api-for-gemini-nano
+chrome://flags/#summarization-api-for-gemini-nano
+chrome://flags/#optimization-guide-on-device-model</pre>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">Set each flag</div>
+      </div>
+      <ul>
+        <li><strong>Prompt API for Gemini Nano</strong> &rarr; <strong>Enabled</strong></li>
+        <li><strong>Summarization API for Gemini Nano</strong> &rarr; <strong>Enabled</strong></li>
+        <li><strong>Enables optimization guide on device</strong> &rarr; <strong>Enabled BypassPerfRequirement</strong> (this last one is only needed on machines under the stated VRAM floor)</li>
+      </ul>
+      <p>ContractFocus needs both the Prompt API (for document-type classification) and the Summarizer API (for the plain-English bullet summary). Without the Summarizer flag, the side panel falls back to a templated summary built from matched clause flags.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <div class="step-title">Relaunch Chrome</div>
+      </div>
+      <p>After changing a flag, Chrome shows a blue <strong>Relaunch</strong> button at the bottom right. Click it. Your tabs will reopen after restart.</p>
+    </div>
+
+    <h2 id="download">Step 2 &middot; Download the Gemini Nano model</h2>
+
+    <p>The Prompt and Summarizer APIs share the same on-device model component. Chrome downloads it in the background once you start using the APIs, but you can trigger and confirm the download through the Components page.</p>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <div class="step-title">Open Chrome components</div>
+      </div>
+      <p>Paste this URL into the address bar:</p>
+      <pre>chrome://components</pre>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <div class="step-title">Find Optimization Guide On Device Model</div>
+      </div>
+      <p>Scroll to the entry named <strong>Optimization Guide On Device Model</strong>. If the version shows as <code>0.0.0.0</code>, the model hasn't been downloaded yet.</p>
+      <p>Click <strong>Check for update</strong>. The status will change to "Downloading" and then, once complete, the version will show something like <code>2024.11.xx.xxxx</code>.</p>
+    </div>
+
+    <div class="callout">
+      The model is roughly 2 GB compressed. First-time download can take several minutes on a fast connection, longer on metered ones. You only pay this cost once per Chrome profile.
+    </div>
+
+    <h2 id="verify">Step 3 &middot; Verify the setup works</h2>
+
+    <p>Open the Chrome DevTools console on any regular webpage (right-click &rarr; Inspect &rarr; Console tab) and paste this check:</p>
+
+    <pre>(async () =&gt; {
+  if (!('LanguageModel' in self)) {
+    console.log('Prompt API not available in this build');
+    return;
+  }
+  const promptStatus = await LanguageModel.availability();
+  console.log('LanguageModel availability:', promptStatus);
+
+  if ('Summarizer' in self) {
+    const sumStatus = await Summarizer.availability();
+    console.log('Summarizer availability:', sumStatus);
+  } else {
+    console.log('Summarizer API not available in this build');
+  }
+})();</pre>
+
+    <p>You're looking for one of these responses per API in the console:</p>
+    <ul>
+      <li><code>"available"</code> &mdash; you're done, ContractFocus AI features are ready.</li>
+      <li><code>"downloadable"</code> or <code>"downloading"</code> &mdash; the model still needs to finish downloading. Check back in a few minutes.</li>
+      <li><code>"unavailable"</code> &mdash; something is off, see <a href="#troubleshoot">troubleshooting</a> below.</li>
+    </ul>
+
+    <div class="callout ok">
+      <strong>When it works inside ContractFocus:</strong> open the side panel, navigate to any Terms of Service or privacy policy page, and click <strong>Decode this page</strong>. You should see a progress line ("Classifying document... Summarizing...") then a bullet summary appear, followed by the clause flags. The status pill at the top of the side panel will read "On-device AI" in green.
+    </div>
+
+    <h2 id="troubleshoot">Troubleshooting</h2>
+
+    <h3>Availability says "unavailable"</h3>
+    <p>The most common causes:</p>
+    <ul>
+      <li><strong>Flag didn't stick.</strong> Revisit <code>chrome://flags/#prompt-api-for-gemini-nano</code> and <code>chrome://flags/#summarization-api-for-gemini-nano</code> and confirm each reads <strong>Enabled</strong>, not Default.</li>
+      <li><strong>Hardware doesn't meet the minimum.</strong> Chrome silently disables the APIs on machines under the VRAM/RAM floor. Enable <code>chrome://flags/#optimization-guide-on-device-model</code> as <strong>Enabled BypassPerfRequirement</strong> and relaunch.</li>
+      <li><strong>Free disk space.</strong> You need at least 22 GB free for the model to download and expand.</li>
+      <li><strong>Enterprise policy.</strong> If your Chrome is managed by an employer, the Prompt and Summarizer APIs may be disabled by policy. Check <code>chrome://policy</code> for <code>GenAILocalFoundationalModelSettings</code>.</li>
+    </ul>
+
+    <h3>Model version stays at 0.0.0.0</h3>
+    <p>Chrome will not start the download until you've actually tried to use one of the APIs once in a page where the flag is enabled. Paste the verification snippet above into DevTools, leave the tab open for a minute, then revisit <code>chrome://components</code> and click <strong>Check for update</strong> again.</p>
+
+    <h3>Side panel status pill reads "Fallback mode"</h3>
+    <p>If ContractFocus can't reach the Prompt or Summarizer API, it runs in fallback mode: the clause pattern matcher still flags all 34 patterns and a templated summary is generated from the flag list. To re-enable the AI pathway:</p>
+    <ol>
+      <li>Confirm <code>LanguageModel.availability()</code> and <code>Summarizer.availability()</code> both return <code>"available"</code> using the snippet above.</li>
+      <li>Close and reopen the side panel so the panel re-checks feature detection on load.</li>
+      <li>If it still doesn't light up, email <a href="mailto:dev@loopheadlabs.com">dev@loopheadlabs.com</a> with your Chrome version (<code>chrome://version</code>) and OS. We'll dig in.</li>
+    </ol>
+
+    <h3>Summary appears but document type says "Unknown"</h3>
+    <p>The Prompt API classifier has a confidence threshold. On short or paywalled pages, the classifier may return "Unknown" while the Summarizer still produces output. The extension will still run all five clause packs against the extracted text, so you aren't losing any red-flag detection. To force a specific document type, use the dropdown above the summary on the side panel.</p>
+
+    <h3>Does this work in Chromium, Edge, Brave, or Arc?</h3>
+    <p>At launch, Google ships the Prompt API, Summarizer API, and the Gemini Nano model only in Chrome Stable and Chrome Canary. Chromium-based browsers that don't bundle the Optimization Guide component will not have the APIs available, so ContractFocus falls back to the pattern-matcher-only mode. The clause detection, history, version-change alerts, and exports all still work on those browsers. Only the AI-generated summary requires Chrome.</p>
+
+    <h2 id="privacy">What stays on your device</h2>
+    <p>Everything relevant to the AI features. ContractFocus never sends page content, uploaded file content, or AI output to any server. The Prompt and Summarizer APIs run inference locally using the Gemini Nano model that Chrome stored on your disk. We don't have an API key to give you, because there's no network call in the pipeline to make one on.</p>
+    <p>The only data that can leave your device is the optional Team plan sync, which writes redacted summary records (not raw contract text) to Firebase Firestore. See the <a href="/team">Team plan setup</a> page and <a href="/privacy#5-team-plan-sync-optional-paid-feature">Privacy Policy Section 5</a> for the full breakdown.</p>
+  </article>
+</div>
+
+<footer>
+  &copy; 2026 Loophead Labs LLC &nbsp;&middot;&nbsp; <a href="/">contractfocus.app</a>
+</footer>
+
+</body>
+</html>
