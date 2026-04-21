@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy | ContractFocus</title>
-  <meta name="description" content="ContractFocus analyzes contracts on-device using Chrome's Gemini Nano. Raw contract text never leaves your browser. The optional Team plan syncs only redacted summaries.">
+  <meta name="description" content="ContractFocus analyzes contracts on-device using Chrome's Gemini Nano. Raw contract text never leaves your browser. The optional Team plan syncs only redacted summaries. Full disclosure of website analytics is included.">
   <meta name="theme-color" content="#0e7c66">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e7c66'/%3E%3Crect x='17' y='13' width='26' height='36' rx='2' fill='white'/%3E%3Crect x='13' y='28' width='34' height='8' rx='4' fill='%23ba7a1e' opacity='0.92'/%3E%3C/svg%3E">
 
@@ -163,7 +163,7 @@
   <article>
     <h1>ContractFocus Privacy Policy</h1>
     <div class="meta">
-      <strong>Effective Date:</strong> April 2026 &nbsp;&middot;&nbsp;
+      <strong>Effective Date:</strong> April 21, 2026 &nbsp;&middot;&nbsp;
       <strong>Publisher:</strong> Loophead Labs LLC
     </div>
 
@@ -257,7 +257,7 @@
       <li><strong>ExtensionPay</strong> (operated by Glench, LLC), which uses <strong>Stripe</strong> to process subscription payments for Pro monthly ($6.99/month), Pro annual ($49/year), and Team annual ($99/year). When you click Upgrade, you are redirected to Stripe Checkout. We never see or store your payment card details. ExtensionPay and Stripe handle that data under their own privacy policies, available at <a href="https://extensionpay.com">extensionpay.com</a> and <a href="https://stripe.com/privacy">stripe.com/privacy</a>.</li>
       <li><strong>Google Firebase (Firestore and Authentication)</strong>, used only on the Team plan for the shared-history feature described in Section 5. Google's privacy policy is available at <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</li>
     </ul>
-    <p>We do not use analytics providers (no Google Analytics, no Mixpanel, no PostHog), advertising networks, or tracking pixels. We do not sell, rent, or share any data with third parties for any purpose other than the direct operation of the features above.</p>
+    <p>The ContractFocus extension itself uses no analytics providers (no Google Analytics, no Mixpanel, no PostHog), advertising networks, or tracking pixels. We do not sell, rent, or share any data with third parties for any purpose other than the direct operation of the features above. For information about the separate, privacy-preserving analytics used on the contractfocus.app marketing website, see Section 10 below.</p>
 
     <h2>7. Children's Privacy</h2>
     <p>ContractFocus is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has used the extension in a way that raises concern, please contact us.</p>
@@ -276,10 +276,24 @@
     <p>If you are a team owner and want your entire team's synced history deleted server-side, email us at the address below with the team invite code and we will purge it.</p>
     <p>Because we do not operate any servers beyond the Firebase project used for optional Team sync, and that data is already scoped per-team, there is nothing further to delete on the Free or Pro tiers.</p>
 
-    <h2>10. Policy Changes</h2>
+    <h2>10. Website Analytics (contractfocus.app)</h2>
+    <p>The marketing website at <code>contractfocus.app</code>, which hosts this Privacy Policy and the setup, team, and installation pages, uses <strong>Vercel Web Analytics</strong> to measure aggregate traffic. This is a separate system from the extension, and no data from inside the extension is ever sent to it.</p>
+    <p>Vercel Web Analytics is designed to be privacy-preserving. Specifically, it:</p>
+    <ul>
+      <li>Does not set cookies or use any other client-side persistent identifiers.</li>
+      <li>Does not fingerprint your device or browser.</li>
+      <li>Does not track you across other sites.</li>
+      <li>Hashes visitor IP addresses with a daily-rotated salt so that individual visitors cannot be re-identified, and discards the raw IP.</li>
+      <li>Collects only page URL, referrer, country (derived at request time), and user-agent category (mobile vs. desktop).</li>
+    </ul>
+    <p>This data is used solely to understand which pages are read most often and where visitors are arriving from, so we can invest in the right documentation. Because no cookies or personal identifiers are set, no consent banner is required under GDPR, ePrivacy, or CCPA. More details are available in Vercel's <a href="https://vercel.com/docs/analytics/privacy-policy">Web Analytics privacy documentation</a>.</p>
+    <p>If you prefer to opt out, standard Do-Not-Track and ad-blocker rules will block the analytics script, and the site remains fully functional.</p>
+    <p><strong>To be clear: the ContractFocus extension itself uses no analytics. Section 2 above describes the extension's on-device data handling, Section 5 covers the optional Team sync, and Section 10 applies only to visits to the marketing website.</strong></p>
+
+    <h2>11. Policy Changes</h2>
     <p>We may update this Privacy Policy as the extension evolves. Changes will be posted at this URL and reflected by the Effective Date above. Material changes will also be noted in the extension's release notes on the Chrome Web Store.</p>
 
-    <h2>11. Contact</h2>
+    <h2>12. Contact</h2>
     <p>For questions about this Privacy Policy or ContractFocus, please contact: <strong><a href="mailto:dev@loopheadlabs.com">dev@loopheadlabs.com</a></strong></p>
   </article>
 </div>

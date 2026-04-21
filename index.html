@@ -3,15 +3,102 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ContractFocus: Read what you&rsquo;re agreeing to</title>
-  <meta name="description" content="ContractFocus decodes Terms of Service, privacy policies, leases, and NDAs into plain English and flags clauses worth reviewing. On-device AI via Chrome&rsquo;s Gemini Nano; nothing leaves your browser.">
+  <title>On-device Terms of Service &amp; contract decoder | ContractFocus</title>
+  <meta name="description" content="ContractFocus turns any Terms of Service, privacy policy, residential lease, NDA, or freelance contract into a plain-English summary and flags 34 red-flag clauses across 5 packs. On-device AI via Chrome&rsquo;s Gemini Nano; your contracts never leave your browser.">
   <meta name="theme-color" content="#0e7c66">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e7c66'/%3E%3Crect x='17' y='13' width='26' height='36' rx='2' fill='white'/%3E%3Crect x='13' y='28' width='34' height='8' rx='4' fill='%23ba7a1e' opacity='0.92'/%3E%3C/svg%3E">
+  <link rel="canonical" href="https://contractfocus.app/">
 
-  <meta property="og:title" content="ContractFocus">
-  <meta property="og:description" content="On-device contract decoder for Terms, privacy policies, leases, and NDAs. Plain-English summary plus red-flag clauses, one click.">
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e7c66'/%3E%3Crect x='17' y='13' width='26' height='36' rx='2' fill='white'/%3E%3Crect x='13' y='28' width='34' height='8' rx='4' fill='%23ba7a1e' opacity='0.92'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://contractfocus.app">
+  <meta property="og:url" content="https://contractfocus.app/">
+  <meta property="og:site_name" content="ContractFocus">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="On-device Terms of Service &amp; contract decoder | ContractFocus">
+  <meta property="og:description" content="Decode any ToS, privacy policy, lease, or NDA into plain English. 34 red-flag clauses across 5 packs. Runs on-device via Chrome&rsquo;s Gemini Nano; nothing leaves your browser.">
+  <meta property="og:image" content="https://contractfocus.app/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ContractFocus decodes Terms of Service, leases, and NDAs into plain-English summaries and flags red-flag clauses, running on-device in Chrome.">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="On-device contract decoder | ContractFocus">
+  <meta name="twitter:description" content="Plain-English ToS, lease, and NDA decoder. 34 red-flag clauses across 5 packs. On-device via Chrome Gemini Nano.">
+  <meta name="twitter:image" content="https://contractfocus.app/assets/og-image.png">
+  <meta name="twitter:image:alt" content="ContractFocus side panel showing red-flag clauses surfaced from a Terms of Service page.">
+
+  <!-- Structured data: product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ContractFocus",
+    "description": "On-device Chrome extension that decodes Terms of Service, privacy policies, leases, NDAs, and freelance contracts into plain-English summaries and flags 34 red-flag clauses across 5 packs.",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome 138+, Edge, Brave, Arc, Opera (Chromium)",
+    "url": "https://contractfocus.app/",
+    "image": "https://contractfocus.app/assets/og-image.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Loophead Labs LLC",
+      "url": "https://loopheadlabs.com"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Three decodes per month, core 3 clause packs, version-change alerts, local history."
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro monthly",
+        "price": "6.99",
+        "priceCurrency": "USD",
+        "description": "Unlimited decodes, core 3 clause packs, PDF and text upload, PDF and Markdown export. Cancel anytime.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "6.99",
+          "priceCurrency": "USD",
+          "unitCode": "MON"
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro annual",
+        "price": "49",
+        "priceCurrency": "USD",
+        "description": "Everything in Pro monthly plus the Privacy and Lease clause packs. Effective $4.08/month.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "49",
+          "priceCurrency": "USD",
+          "unitCode": "ANN"
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Team",
+        "price": "99",
+        "priceCurrency": "USD",
+        "description": "Everything in Pro annual for up to 5 teammates. Owner pays once; shared contract history.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "99",
+          "priceCurrency": "USD",
+          "unitCode": "ANN"
+        }
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root {
@@ -453,9 +540,86 @@
     .footer-links { display: flex; gap: 22px; }
     .footer-links a { color: var(--ink-soft); }
 
+    .hero-figure {
+      padding: 8px 0 72px;
+      margin: 0;
+    }
+    .hero-figure .hero-shot {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(22, 33, 29, 0.18), 0 6px 18px rgba(22, 33, 29, 0.08);
+    }
+    .hero-figure figcaption {
+      margin-top: 14px;
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .faq {
+      padding: 72px 0;
+    }
+    .faq-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 22px;
+      transition: border-color 0.15s ease;
+    }
+    .faq-item[open] {
+      border-color: var(--brand);
+    }
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 22px;
+      color: var(--brand);
+      font-weight: 400;
+      transition: transform 0.15s ease;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after {
+      content: "\2013";
+    }
+    .faq-item p {
+      margin: 14px 0 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+
     @media (max-width: 600px) {
       .hero { padding: 56px 0 40px; }
-      .features, .differentiators, .pricing, .packs { padding: 56px 0; }
+      .features, .differentiators, .pricing, .packs, .faq { padding: 56px 0; }
+      .hero-figure { padding: 4px 0 40px; }
       .nav-links { display: none; }
     }
   </style>
@@ -468,15 +632,18 @@
       <span class="brand-mark" aria-hidden="true"></span>
       <span>ContractFocus</span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary">
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
       <a href="/setup">Chrome AI setup</a>
       <a href="/team">Team plan</a>
       <a href="/privacy">Privacy</a>
     </nav>
   </div>
 </header>
+
+<main>
 
 <section class="hero">
   <div class="wrap">
@@ -492,6 +659,16 @@
     <div class="meta-line">Free tier included. Pro $6.99/mo or $49/yr. Team $99/yr, 5 seats.</div>
   </div>
 </section>
+
+<figure class="hero-figure">
+  <div class="wrap">
+    <img class="hero-shot"
+         src="/assets/contractfocus-hero.png"
+         alt="ContractFocus side panel open next to a Terms of Service page, showing a plain-English summary and a list of flagged clauses with the exact text and why each one matters."
+         width="1200" height="506" loading="eager" decoding="async">
+    <figcaption>ContractFocus side panel on a Terms of Service page. Summary plus flagged clauses, side by side.</figcaption>
+  </div>
+</figure>
 
 <section class="trust">
   <div class="wrap">
@@ -722,11 +899,130 @@
   </div>
 </section>
 
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Frequently asked questions</h2>
+      <p>What ContractFocus actually does, where the AI runs, and how the packs and tiers fit together.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What kinds of documents can ContractFocus decode?</summary>
+        <p>Any Terms of Service or privacy policy you load in Chrome, plus pasted text and PDF uploads up to 10&nbsp;MB. That covers consumer ToS, SaaS master agreements, residential leases, freelance contracts, non-disclosure agreements, gym and club memberships, property management amendments, and similar documents. If it reads like a contract, ContractFocus will decode it.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does any contract text leave my browser?</summary>
+        <p>No. ContractFocus runs entirely on your device using Chrome&rsquo;s built-in Prompt and Summarizer APIs, which call the Gemini Nano model locally. Your leases, NDAs, freelance agreements, and pasted text are never sent to our servers, to Google, or to any third-party AI provider. There are no API keys to enter.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is a &ldquo;clause pack&rdquo; and which ones do I get?</summary>
+        <p>A pack is a bundle of clause patterns built for a specific kind of contract. ContractFocus ships with 34 patterns across 5 packs: Auto-renewal &amp; billing, Arbitration &amp; class-action, Liability &amp; indemnity, Privacy &amp; data, and Lease &amp; tenant. Free and Pro monthly users get the first 3 packs. Pro annual and Team add the Privacy and Lease packs. Every flagged clause includes the matched text and a short explanation of why it matters.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do version-change alerts work?</summary>
+        <p>When you decode a contract, ContractFocus stores a local fingerprint of the document in your browser. The next time you visit the same page or re-upload the same contract, it compares the new fingerprint to the stored one and shows a side-by-side diff of what changed. That way silent ToS updates and landlord &ldquo;amendments&rdquo; don&rsquo;t slip by.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How does the Team plan work?</summary>
+        <p>The Team plan is $99/year flat. The owner pays once and invites up to 5 teammates with a code; there is no per-seat charge. Every decode any teammate runs syncs to a shared history so everyone can review the same contract without forwarding links. Team seats automatically include the Privacy and Lease packs.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is Pro a subscription or a one-time purchase?</summary>
+        <p>Pro is a subscription. You can pick monthly ($6.99/mo) or annual ($49/yr), and cancel at any time from <code>chrome://extensions</code>. A seven-day grace period applies after a failed payment before premium features roll back to free. The Free tier is permanent and never expires.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does ContractFocus replace a lawyer?</summary>
+        <p>No. ContractFocus is a reading aid. It speeds up the part where you skim a contract to find the parts worth paying attention to, but it does not give legal advice, and the summaries and clause flags should not be treated as a substitute for counsel on consequential agreements.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does ContractFocus work in Edge, Brave, Arc, or Opera?</summary>
+        <p>Yes. Any Chromium-based browser on version 138 or later with Chrome&rsquo;s built-in AI runtime enabled will work. The setup flow is the same as standard Chrome. Firefox and Safari are not currently supported because they do not ship the Prompt and Summarizer APIs.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What kinds of documents can ContractFocus decode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any Terms of Service or privacy policy loaded in Chrome, plus pasted text and PDF uploads up to 10 MB. This covers consumer ToS, SaaS master agreements, residential leases, freelance contracts, non-disclosure agreements, gym and club memberships, and property management amendments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does any contract text leave my browser?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ContractFocus runs entirely on your device using Chrome's built-in Prompt and Summarizer APIs, which call the Gemini Nano model locally. Contracts are never sent to our servers, to Google, or to any third-party AI provider."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a clause pack and which ones do I get?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A pack is a bundle of clause patterns. ContractFocus ships 34 patterns across 5 packs: Auto-renewal and billing, Arbitration and class-action, Liability and indemnity, Privacy and data, and Lease and tenant. Free and Pro monthly users get the first 3 packs. Pro annual and Team add the Privacy and Lease packs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do version-change alerts work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ContractFocus stores a local fingerprint of every decoded contract in your browser. When you revisit the same page or re-upload the same document, it compares fingerprints and shows a side-by-side diff of what changed, so silent ToS updates and landlord amendments don't slip by."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the Team plan work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Team plan is $99/year flat. The owner pays once and invites up to 5 teammates with a code; there is no per-seat charge. Every decode syncs to a shared history, and Team seats include the Privacy and Lease packs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Pro a subscription or a one-time purchase?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pro is a subscription. Monthly is $6.99 and annual is $49, cancellable at any time from chrome://extensions. A seven-day grace period applies after a failed payment before premium features roll back to free. The Free tier is permanent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ContractFocus replace a lawyer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ContractFocus is a reading aid that helps you find the parts of a contract worth paying attention to. It does not provide legal advice, and its summaries and clause flags should not substitute for counsel on consequential agreements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does ContractFocus work in Edge, Brave, Arc, or Opera?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Any Chromium-based browser on version 138 or later with Chrome's built-in AI runtime enabled works. Firefox and Safari are not supported because they do not ship the Prompt and Summarizer APIs."
+      }
+    }
+  ]
+}
+</script>
+
 <section class="disclaimer">
   <div class="wrap">
     ContractFocus surfaces clauses worth reviewing. It is a reading aid, not legal advice.
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap footer-row">
@@ -739,6 +1035,9 @@
     </div>
   </div>
 </footer>
+
+<!-- Vercel Web Analytics (privacy-friendly, no cookies) -->
+<script defer src="/_vercel/insights/script.js"></script>
 
 </body>
 </html>
